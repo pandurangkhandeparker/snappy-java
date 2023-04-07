@@ -37,3 +37,6 @@ ENV AS=/usr/bin/${CROSS_TRIPLE}-as \
 
 ENV DEFAULT_DOCKCROSS_IMAGE dockcross/linux-s390x
 WORKDIR /work
+
+COPY Toolchain-s390x.cmake /usr/lib/${CROSS_TRIPLE}/Toolchain.cmake
+ENV CMAKE_TOOLCHAIN_FILE /usr/lib/${CROSS_TRIPLE}/Toolchain.cmake

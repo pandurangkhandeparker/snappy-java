@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: add permission
+        run: chmod +x ./docker/dockcross-s390x
       - name: Build native libraries
         run: make clean-native native-all
         env:
