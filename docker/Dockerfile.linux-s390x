@@ -1,0 +1,39 @@
+FROM dockcross/base:latest
+# MAINTAINER Taro L. Saito "leo@xerial.org"
+MAINTAINER xyz "xyz@company.com"
+
+# Add the cross compiler sources
+RUN echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list && \
+    dpkg --add-architecture s390x && \
+    curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | apt-key add -
+
+RUN apt-get update && apt-get install -y \
+    crossbuild-essential-s390x \
+    gfortran-s390x-linux-gnu \
+    libbz2-dev:s390x \
+    libexpat1-dev:s390x \
+    libncurses-dev:s390x \
+    libssl-dev:s390x
+
+WORKDIR /usr/src
+
+RUN apt-get update && \
+    apt-get install -y libglib2.0-dev zlib1g-dev libpixman-1-dev && \
+    curl -L https://download.qemu.org/qemu-6.0.0.tar.xz | tar -xJ && \
+    cd qemu-6.0.0 && \
+    ./configure --target-list=s390x-linux-user --prefix=/usr && \
+    make -j$(nproc) && \
+    make install && \
+    cd .. && rm -rf qemu-6.0.0
+
+ENV CROSS_TRIPLE s390x-linux-gnu
+ENV CROSS_ROOT /usr/${CROSS_TRIPLE}
+ENV AS=/usr/bin/${CROSS_TRIPLE}-as \
+    AR=/usr/bin/${CROSS_TRIPLE}-ar \
+    CC=/usr/bin/${CROSS_TRIPLE}-gcc \
+    CPP=/usr/bin/${CROSS_TRIPLE}-cpp \
+    CXX=/usr/bin/${CROSS_TRIPLE}-g++ \
+    LD=/usr/bin/${CROSS_TRIPLE}-ld
+
+ENV DEFAULT_DOCKCROSS_IMAGE dockcross/linux-s390x
+WORKDIR /work
