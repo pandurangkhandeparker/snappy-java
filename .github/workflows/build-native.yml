@@ -6,11 +6,13 @@ on:
 jobs:
   build:
     name: Build native libraries
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: add permission
         run: chmod +x ./docker/dockcross-s390x
+      - name: Install dependencies for s390x
+        run: apt-get install build-essential
       - name: Build native libraries
         run: make clean-native native-all
         env:
@@ -22,7 +24,7 @@ jobs:
           path: src/main/resources/org/xerial/snappy/native/
   push:
     name: Push new native libraries to branch
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [build]
     steps:
       - uses: actions/checkout@v3
