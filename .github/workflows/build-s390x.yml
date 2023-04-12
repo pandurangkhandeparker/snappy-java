@@ -1,0 +1,30 @@
+name: Snappy-java CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    # strategy:
+    #   matrix:
+    #     os:
+    #       - ubuntu-latest
+    #       - s390x-linux-gnu
+
+    steps:
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libc6-dev-s390x build-essential libgcc-s1-s390x-cross
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+
+      - name: Build and Test
+        run: make clean linux-s390x
+
