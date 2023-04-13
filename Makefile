@@ -217,7 +217,7 @@ linux-riscv64: jni-header
 	./docker/dockcross-riscv64 -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=/usr/xcc/riscv64-unknown-linux-gnu/bin/riscv64-unknown-linux-gnu- OS_NAME=Linux OS_ARCH=riscv64'
 
 linux-s390x: jni-header
-	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'ldd target/snappy-1.1.7-Linux-s390x/libsnappyjava.so && make clean-native native CROSS_PREFIX=/usr/xcc/s390x-ibm-linux-gnu/bin/s390x-ibm-linux-gnu- OS_NAME=Linux OS_ARCH=s390x'
+	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native && ldd target/snappy-1.1.9-Linux-s390x/libsnappyjava.so && make native CROSS_PREFIX=/usr/xcc/s390x-ibm-linux-gnu/bin/s390x-ibm-linux-gnu- OS_NAME=Linux OS_ARCH=s390x'
 
 javadoc:
 	$(SBT) doc
