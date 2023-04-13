@@ -56,7 +56,7 @@ ifndef CXXFLAGS_BITSHUFFLE
 endif
 
 ifeq ($(OS_ARCH),s390x)
-  CXXFLAGS += -march=z196 -mtune=zEC12 -O3
+	CXXFLAGS += -march=z196 -mtune=zEC12 -O3
 endif
 
 ifeq ($(OS_NAME),SunOS)
@@ -221,7 +221,7 @@ linux-riscv64: jni-header
 	./docker/dockcross-riscv64 -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=/usr/xcc/riscv64-unknown-linux-gnu/bin/riscv64-unknown-linux-gnu- OS_NAME=Linux OS_ARCH=riscv64'
 
 linux-s390x: jni-header
-	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'sudo apt-get update && sudo apt-get install -y build-essential gcc-11 g++-11 && export CXX=/usr/bin/g++-11 && export LD_LIBRARY_PATH=/usr/xcc/s390x-ibm-linux-gnu/s390x-ibm-linux-gnu/lib64/ && make clean-native native CROSS_PREFIX=s390x-linux-gnu-g++-11 OS_NAME=Linux OS_ARCH=s390x SNAPPY_CMAKE_OPTS="-DHAVE_SYS_UIO_H=0"'
+	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'sudo apt-get update && sudo apt-get install -y build-essential openjdk-8-jdk g++-11 && export CXX=/usr/bin/g++-11 && export LD_LIBRARY_PATH=/usr/xcc/s390x-ibm-linux-gnu/s390x-ibm-linux-gnu/lib64/ && make clean-native native CROSS_PREFIX=s390x-unknown-linux-gnu- OS_NAME=Linux OS_ARCH=s390x SNAPPY_CMAKE_OPTS="-DHAVE_SYS_UIO_H=0"'
 
 javadoc:
 	$(SBT) doc
