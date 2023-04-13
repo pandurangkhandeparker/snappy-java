@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y \
     libssl-dev:s390x \
     openjdk-8-jdk:s390x \
     libtool:s390x \ 
-    pkg-config:s390x
+    pkg-config:s390x \
+    libc6-dev-s390x \
+    libgcc-s1-s390x-cross
 
 WORKDIR /usr/src
 
@@ -29,14 +31,16 @@ RUN apt-get update && \
     make install && \
     cd .. && rm -rf qemu-6.0.0
 
-ENV CROSS_TRIPLE s390x-linux-gnu
+ENV CROSS_TRIPLE s390x-ibm-linux-gnu
 ENV CROSS_ROOT /usr/${CROSS_TRIPLE}
 ENV AS=/usr/bin/${CROSS_TRIPLE}-as \
     AR=/usr/bin/${CROSS_TRIPLE}-ar \
     CC=/usr/bin/${CROSS_TRIPLE}-gcc \
     CPP=/usr/bin/${CROSS_TRIPLE}-cpp \
     CXX=/usr/bin/${CROSS_TRIPLE}-g++ \
-    LD=/usr/bin/${CROSS_TRIPLE}-ld
+    LD=/usr/bin/${CROSS_TRIPLE}-ld \
+    FC=/usr/bin/${CROSS_TRIPLE}-gfortran 
+
 
 ENV DEFAULT_DOCKCROSS_IMAGE dockcross/linux-s390x
 ENV LD_LIBRARY_PATH /usr/local/lib64
