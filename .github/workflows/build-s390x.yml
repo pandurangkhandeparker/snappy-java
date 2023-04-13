@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     # strategy:
     #   matrix:
@@ -21,7 +21,7 @@ jobs:
         run: chmod +x ./docker/dockcross-s390x
         
       - name: Install Dependencies
-        run: sudo apt-get update && sudo apt-get install -y libc6-dev-s390x-cross build-essential libgcc-s1-s390x-cross openjdk-8-jdk libstdc++-11-dev-s390x-cross libtool 
+        run: sudo apt-get update && sudo apt-get install -y libc6-dev-s390x-cross build-essential libgcc-11-s390x-cross gcc-11-cross-base openjdk-8-jdk libstdc++-11-dev-s390x-cross libtool 
 
       - name: Set variables JAVA_HOME
         run: export JAVA_HOME=//usr/lib/jvm/java-8-openjdk-s390x
