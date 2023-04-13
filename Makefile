@@ -221,7 +221,7 @@ linux-riscv64: jni-header
 	./docker/dockcross-riscv64 -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=/usr/xcc/riscv64-unknown-linux-gnu/bin/riscv64-unknown-linux-gnu- OS_NAME=Linux OS_ARCH=riscv64'
 
 linux-s390x: jni-header
-	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=/usr/xcc/s390x-ibm-linux-gnu/bin/s390x-ibm-linux-gnu- OS_NAME=Linux OS_ARCH=s390x SNAPPY_CMAKE_OPTS="-DHAVE_SYS_UIO_H=0"'
+	./docker/dockcross-s390x -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=s390x-linux-gnu- OS_NAME=Linux OS_ARCH=s390x SNAPPY_CMAKE_OPTS="-DHAVE_SYS_UIO_H=0"'
 
 javadoc:
 	$(SBT) doc
