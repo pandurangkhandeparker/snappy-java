@@ -25,6 +25,12 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build]
     steps:
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: refs/pull/42/merge
+          directory: .
       - uses: actions/checkout@v3
       - name: Download native libraries
         uses: actions/download-artifact@v3
