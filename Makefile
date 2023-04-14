@@ -55,6 +55,8 @@ ifndef CXXFLAGS_BITSHUFFLE
   endif
 endif
 
+# set cxx flags for s390x arch to compile code on specific processor model
+# not needed if the code is required to be run across different porcessor models
 # ifeq ($(OS_ARCH),s390x)
 # 	CXXFLAGS += -march=z196 -mtune=zEC12 -O3
 # endif

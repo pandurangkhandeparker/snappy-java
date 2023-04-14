@@ -1,4 +1,4 @@
-name: Snappy-java CI
+name: s390x CI support
 
 on:
   workflow_dispatch:
@@ -6,12 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
-    # strategy:
-    #   matrix:
-    #     os:
-    #       - ubuntu-latest
-    #       - s390x-linux-gnu
 
     steps:
       - name: Checkout code
@@ -27,13 +21,6 @@ jobs:
         run: export JAVA_HOME=//usr/lib/jvm/java-8-openjdk-s390x
       - name: Set variables PATH
         run: export PATH=$JAVA_HOME/bin:$PATH
-
-      # - name: Run commands
-      #   run: make IBM_JDK_7=1 USE_GIT=1 GIT_SNAPPY_BRANCH=1.1.9 GIT_REPO_URL=https://github.com/google/snappy.git
-      # - name: Set up JDK
-      #   uses: actions/setup-java@v1
-      #   with:
-      #     java-version: 8
 
       - name: Build and Test
         run: make clean linux-s390x

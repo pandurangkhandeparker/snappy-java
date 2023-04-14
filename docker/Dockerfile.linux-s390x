@@ -43,7 +43,7 @@ ENV AS=/usr/bin/${CROSS_TRIPLE}-as \
 
 
 ENV DEFAULT_DOCKCROSS_IMAGE dockcross/linux-s390x
-ENV LD_LIBRARY_PATH /usr/local/lib64
+ENV LD_LIBRARY_PATH /usr/xcc/s390x-ibm-linux-gnu/s390x-ibm-linux-gnu/lib64
 
 WORKDIR /work
 
