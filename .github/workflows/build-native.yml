@@ -26,12 +26,6 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v3
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PAT }}
-          branch: refs/pull/42/merge
-          directory: .
       - name: Download native libraries
         uses: actions/download-artifact@v3
         with:

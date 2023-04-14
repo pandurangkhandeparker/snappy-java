@@ -55,9 +55,9 @@ ifndef CXXFLAGS_BITSHUFFLE
   endif
 endif
 
-ifeq ($(OS_ARCH),s390x)
-	CXXFLAGS += -march=z196 -mtune=zEC12 -O3
-endif
+# ifeq ($(OS_ARCH),s390x)
+# 	CXXFLAGS += -march=z196 -mtune=zEC12 -O3
+# endif
 
 ifeq ($(OS_NAME),SunOS)
 	TAR:= gtar
